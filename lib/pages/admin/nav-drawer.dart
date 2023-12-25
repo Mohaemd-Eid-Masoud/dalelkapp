@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:loginui/pages/authenauthor/login.dart';
 import 'package:loginui/pages/userinterfaces/feedback.dart';
 import 'package:loginui/pages/userinterfaces/home.dart';
-import 'package:loginui/pages/userinterfaces/profilepage.dart';
 
 class NavDrawer extends StatelessWidget {
   @override
@@ -14,39 +12,50 @@ class NavDrawer extends StatelessWidget {
           DrawerHeader(
             // child: Text(
             //   '',
-            //   style: TextStyle(color: Color.fromARGB(246, 66, 3, 147), fontSize: 30,fontWeight: FontWeight.bold),
+            //   style: TextStyle(color: Colors.white, fontSize: 25),
             // ),
             decoration: BoxDecoration(
-                color: Color.fromARGB(255, 180, 217, 235),
+                color: Color.fromARGB(255, 4, 82, 121),
                 image: DecorationImage(
                     fit: BoxFit.fill,
-                    image: AssetImage('assets/logo1.png'))), child: null,
+                    image: AssetImage('assets/logo_5.png'))), child: null,
+          ),
+          ListTile(
+            leading: Icon(Icons.notification_add_rounded),
+            title: Text('Notifications'),
+            onTap: () => {Navigator.push(context, MaterialPageRoute(builder: (context)=>FeedbackPage()))},
           ),
           ListTile(
             leading: Icon(Icons.input),
-            title: Text('Welcome'),
-            onTap: () => {Navigator.push(context, MaterialPageRoute(builder: (context)=>MyWidget()))},
+            title: Text('Admin Panel'),
+            onTap: () => {},
           ),
           ListTile(
             leading: Icon(Icons.verified_user),
-            title: Text('Profile'),
-            // onTap: () => {Navigator.push(context, MaterialPageRoute(builder: (context)=>ProfilePage(user: null,)))},
+            title: Text('User Managment'),
+            onTap: () => {Navigator.of(context).pop()},
           ),
           // ListTile(
           //   leading: Icon(Icons.settings),
           //   title: Text('Settings'),
-          //   // onTap: () => {Navigator.push(context, MaterialPageRoute(builder: (context)=>()))},
+          //   onTap: () => {Navigator.of(context).pop()},
           // ),
           ListTile(
+            leading: Icon(Icons.query_builder_rounded),
+            title: Text('inquiry'),
+            onTap: () => {Navigator.push(context, MaterialPageRoute(builder: (context)=>FeedbackPage()))},
+          ),
+          ListTile(
             leading: Icon(Icons.border_color),
-            title: Text('Feedback'),
+            title: Text('User Feedbacks'),
             onTap: () => {Navigator.push(context, MaterialPageRoute(builder: (context)=>FeedbackPage()))},
           ),
           ListTile(
             leading: Icon(Icons.exit_to_app),
             title: Text('Logout'),
-            onTap: () => {Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginView()))},
+            // onTap: () => {Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginScreen()))},
           ),
+
         ],
       ),
     );
