@@ -8,6 +8,15 @@ import 'package:loginui/pages/userinterfaces/home.dart';
 import 'package:loginui/pages/authenauthor/signup.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
+
+   class UserModel{
+    static String? email;
+    static String? fname;
+    static String? lname;
+    static String? phone;
+    static String? birthdate;
+    static String? gender;
+   }
 class LoginView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -66,12 +75,13 @@ class _myloginState extends State<mylogin> with SingleTickerProviderStateMixin {
          var myToken = responseData['token'];
           prefs.setString('token', myToken);
         if(isAdmin == true){
-          Navigator.push(context, MaterialPageRoute(builder: (_)=>MyApp(token: myToken)));
+          Navigator.push(context, MaterialPageRoute(builder: (_)=>MyApp()));
+
         }
         else {
             var myToken = responseData['token'];
           prefs.setString('token', myToken);
-           Navigator.push(context, MaterialPageRoute(builder: (_)=>MyWidget(token: myToken)));
+           Navigator.push(context, MaterialPageRoute(builder: (_)=>MyWidget()));
         }
         }
     }
@@ -190,7 +200,7 @@ class _myloginState extends State<mylogin> with SingleTickerProviderStateMixin {
                       TextFormField(
                         controller: password,
                         validator: (value) {
-                          if (value!.length < 8) {
+                          if (password.text.isEmpty) {
                             return "Please enter a valid password";
                           }
                           return null;
@@ -228,7 +238,11 @@ class _myloginState extends State<mylogin> with SingleTickerProviderStateMixin {
                             borderRadius: BorderRadius.circular(30)),
                         padding: const EdgeInsets.symmetric(
                             horizontal: 100, vertical: 20),
-                        onPressed: () => loginUser() ,
+                        onPressed: () => 
+                        {
+                        if(_formKey.currentState!.validate())
+                        loginUser() 
+                        },
                         child: const Text(
                           'Login',
                           style: TextStyle(

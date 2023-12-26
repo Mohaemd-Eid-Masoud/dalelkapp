@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:loginui/pages/authenauthor/config.dart';
+import 'package:loginui/pages/userinterfaces/home.dart';
 
 // Model for structured data
 class DataModel {
@@ -127,7 +128,39 @@ class _MyPageState extends State<MyPage> {
             return Center(child: CircularProgressIndicator());
           }
         },
-      ),
-    );
+      ),  bottomNavigationBar: BottomNavigationBar(
+      //  currentIndex: selectedIndex, // selected tab index
+      //  onTap: _onItemTapped, // handle tap on items
+       items: [
+        BottomNavigationBarItem(
+        icon: Icon(Icons.home),
+        label: 'Home',
+        ),
+        BottomNavigationBarItem(
+        icon: Icon(Icons.help_outline),
+        label: 'inquiry',
+         ),
+         // Add items for all your navigation destinations
+        ],
+         )
+         );
+           
+  }
+  void _onItemTapped(int index) {
+  setState(() {
+    // selectedIndex = index;
+  });
+  // Navigate to the respective screen based on the selected index
+  
+  switch (index) {
+    case 0:
+     {Navigator.push(context, MaterialPageRoute(builder: (context)=>MyWidget()));}
+     break;
+    case 1:
+      Navigator.pushNamed(context, '/settings');
+      break;
+    // Add cases for navigating to other screens
   }
 }
+ }
+

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:loginui/pages/admin/adminpage.dart';
+import 'package:loginui/pages/authenauthor/login.dart';
 import 'package:loginui/pages/userinterfaces/feedback.dart';
 import 'package:loginui/pages/userinterfaces/home.dart';
 
@@ -20,21 +22,21 @@ class NavDrawer extends StatelessWidget {
                     fit: BoxFit.fill,
                     image: AssetImage('assets/logo_5.png'))), child: null,
           ),
-          ListTile(
-            leading: Icon(Icons.notification_add_rounded),
-            title: Text('Notifications'),
-            onTap: () => {Navigator.push(context, MaterialPageRoute(builder: (context)=>FeedbackPage()))},
-          ),
+          // ListTile(
+          //   leading: Icon(Icons.notification_add_rounded),
+          //   title: Text('Notifications'),
+          //   onTap: () => {Navigator.push(context, MaterialPageRoute(builder: (context)=>FeedbackPage()))},
+          // ),
           ListTile(
             leading: Icon(Icons.input),
             title: Text('Admin Panel'),
-            onTap: () => {},
+            onTap: () => {Navigator.push(context, MaterialPageRoute(builder: (context)=>MyApp()))},
           ),
-          ListTile(
-            leading: Icon(Icons.verified_user),
-            title: Text('User Managment'),
-            onTap: () => {Navigator.of(context).pop()},
-          ),
+          // ListTile(
+          //   leading: Icon(Icons.verified_user),
+          //   title: Text('User Managment'),
+          //   onTap: () => {Navigator.of(context).pop()},
+          // ),
           // ListTile(
           //   leading: Icon(Icons.settings),
           //   title: Text('Settings'),
@@ -53,7 +55,7 @@ class NavDrawer extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.exit_to_app),
             title: Text('Logout'),
-            // onTap: () => {Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginScreen()))},
+            onTap: () => {Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginView()))},
           ),
 
         ],

@@ -1,4 +1,7 @@
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
+import 'package:loginui/pages/authenauthor/config.dart';
 import 'package:loginui/pages/userinterfaces/home.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
@@ -14,6 +17,27 @@ class _FeedbackPageState extends State<FeedbackPage> {
   String _feedback = '';
   int _rating = 0;
 
+// Add this function inside your _FeedbackPageState class
+Future<void> sendFeedback(String feedback,String user_id) async {
+
+  final response = await http.post(
+    Uri.parse(sendfeedback),
+    headers: {'Content-Type': 'application/json'},
+    body: jsonEncode({
+      'feedback': feedback,
+      'user_id': user_id,
+    }),
+  );
+
+  if (response.statusCode == 200) {
+    // Feedback submitted successfully
+    print('Feedback submitted successfully');
+  } else {
+    // Handle error if the request fails
+    print('Failed to submit feedback. Status code: ${response.statusCode}');
+    print('Response body: ${response.body}');
+  }
+}
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,7 +62,7 @@ class _FeedbackPageState extends State<FeedbackPage> {
                 ),
               ),
               const SizedBox(height: 16.0),
-              // Text('Rate your experience:'),
+              Text('Rate your experience:'),
               const SizedBox(height: 8.0),
               //  RatingBar(
               //   initialRating: _rating.toDouble(),
@@ -51,6 +75,7 @@ class _FeedbackPageState extends State<FeedbackPage> {
                     _formKey.currentState!.save();
                     // Add your logic to submit feedback here (e.g., using an API call)
                     print('Feedback submitted: $_feedback, Rating: $_rating');
+                    // sendFeedback(_feedback, user_id)
                     // Show a confirmation message or navigate to another page
                   }
                 },

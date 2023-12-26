@@ -6,9 +6,7 @@ import 'package:http/http.dart' as http;
 
 void main() {
   runApp(MyApp(
-      token:
-          "your_token_here")); // Replace "your_token_here" with an actual token
-}
+      )); }
 
 class StepData {
   late String? title;
@@ -27,9 +25,7 @@ class StepData {
 }
 
 class MyApp extends StatelessWidget {
-  final String token;
-
-  const MyApp({required this.token, Key? key}) : super(key: key);
+  
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +48,7 @@ class _AdminPageState extends State<AdminPage> {
   void initState() {
     super.initState();
   setState(() {
-    getSteps;
+    getSteps();
   });
   }
 
@@ -160,7 +156,7 @@ class _AdminPageState extends State<AdminPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer :NavDrawer(),
+      drawer : NavDrawer(),
       appBar: AppBar(
         title: const Text(
           'Dalelk Admin Panel',

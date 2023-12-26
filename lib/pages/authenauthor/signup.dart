@@ -51,6 +51,7 @@ late SharedPreferences prefs;
         "birthdate":birthDateController.text,
         "email":emailController.text,
         "password":passwordController.text,
+        "gender":selectedGender
       };
 
       var response = await http.post(Uri.parse(registration),
@@ -461,6 +462,7 @@ late SharedPreferences prefs;
                       color: Colors.purple,
                       textColor: Colors.white,
                       onPressed: () async {
+                        if(_formKey.currentState!.validate())
                         registerUser();
                       },
 

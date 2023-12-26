@@ -5,3 +5,4 @@ final upload = url + 'upload';
 final addContent = url +'addContent';
 final getContent = url + 'getContent';
 final editContent = url + 'editContent';
+final sendfeedback = url +'feedback';
