@@ -297,6 +297,7 @@ late SharedPreferences prefs;
                         borderSide: const BorderSide(color: Colors.white),
                       ),
                     ),
+                    obscureText: obscureText,
                   ),
                   Container(height: 10),
                   TextFormField(

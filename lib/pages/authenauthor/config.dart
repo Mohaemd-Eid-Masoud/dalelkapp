@@ -6,3 +6,4 @@ final addContent = url +'addContent';
 final getContent = url + 'getContent';
 final editContent = url + 'editContent';
 final sendfeedback = url +'feedback';
+final uploadimage = url + 'upload';

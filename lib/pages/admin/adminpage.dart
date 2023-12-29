@@ -4,9 +4,10 @@ import 'package:loginui/pages/admin/nav-drawer.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-void main() {
-  runApp(MyApp(
-      )); }
+// void main() {
+//   runApp(MyApp(
+//   ));
+// }
 
 class StepData {
   late String? title;
@@ -25,19 +26,47 @@ class StepData {
 }
 
 class MyApp extends StatelessWidget {
-  
+ static List<int>? index0;
+   
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: AdminPage(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
-
 class AdminPage extends StatefulWidget {
   const AdminPage({super.key});
+  static Future<List<StepData>?> getSteps() async {
+  final response = await http.get(Uri.parse(getContent));
+  if (response.statusCode == 200) {
+    final dynamic responseData = jsonDecode(response.body);
 
+    print('Response Body: $responseData');
+
+    if (responseData != null &&
+        responseData['content'] is List<dynamic>) {
+      final List<dynamic> stepsList = responseData['content'];
+      print('Success to get steps. Status code: ${response.statusCode}');
+      List<StepData> stepsData;
+      return stepsData = stepsList
+          .map((step) => StepData(
+                title: step['title'],
+                description: step['description'],
+                steps: List<String>.from(step['content']),
+              ))
+          .toList();
+    } else {
+      print('Invalid response format or missing "content" key.');
+      return null;
+    }
+  } else {
+    print('Failed to get steps. Status code: ${response.statusCode}');
+    return null; // Return null in case of failure
+  }
+}
   @override
   State<AdminPage> createState() => _AdminPageState();
 }
@@ -48,7 +77,7 @@ class _AdminPageState extends State<AdminPage> {
   void initState() {
     super.initState();
   setState(() {
-    getSteps();
+    getSteps;
   });
   }
 
@@ -126,7 +155,7 @@ class _AdminPageState extends State<AdminPage> {
           print('Tapped on ${post.title}');
         },
       child: Container(
-        color: Color.fromARGB(255, 250, 233, 255),
+        color: Color.fromARGB(143, 247, 208, 241),
         margin: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
         padding: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
         height: 100,
@@ -156,7 +185,7 @@ class _AdminPageState extends State<AdminPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer : NavDrawer(),
+      drawer :NavDrawer(),
       appBar: AppBar(
         title: const Text(
           'Dalelk Admin Panel',
@@ -267,7 +296,6 @@ class _AdminPageState extends State<AdminPage> {
                             description,
                             steps);
                             print(stepsData);
-
                       });
                       Navigator.pop(context);
                     },

@@ -30,7 +30,7 @@ class NavDrawer extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.verified_user),
             title: Text('Profile'),
-            // onTap: () => {Navigator.push(context, MaterialPageRoute(builder: (context)=>ProfilePage(user: null,)))},
+            onTap: () => {Navigator.push(context, MaterialPageRoute(builder: (context)=>ProfilePage()))},
           ),
           // ListTile(
           //   leading: Icon(Icons.settings),

@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import 'package:loginui/pages/admin/adminpage.dart';
 import 'package:loginui/pages/authenauthor/config.dart';
 import 'package:lottie/lottie.dart';
@@ -8,7 +9,7 @@ import 'package:loginui/pages/userinterfaces/home.dart';
 import 'package:loginui/pages/authenauthor/signup.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
-
+// import 'package:localize_and_translate/localize_and_translate.dart';
    class UserModel{
     static String? email;
     static String? fname;
@@ -40,10 +41,9 @@ class _myloginState extends State<mylogin> with SingleTickerProviderStateMixin {
 
   @override
   void initState() {
+    Intl.withLocale('ar', () => print(myLocalizedMessage()));
     super.initState();
-    // TODO: implement initState
     super.initState();
-    initSharedPref();
     email = TextEditingController();
     password = TextEditingController();
     _controller = AnimationController(
@@ -53,10 +53,7 @@ class _myloginState extends State<mylogin> with SingleTickerProviderStateMixin {
   }
   late SharedPreferences prefs;
     bool _isNotValidate = false;
-  void initSharedPref() async{
-    prefs = await SharedPreferences.getInstance();
-  }
-  void loginUser() async{
+    void loginUser() async{
     if(email.text.isNotEmpty && password.text.isNotEmpty){
 
       var reqBody = {
@@ -72,15 +69,12 @@ class _myloginState extends State<mylogin> with SingleTickerProviderStateMixin {
         //Handle successful login response
         final responseData = json.decode(response.body);
         final bool isAdmin = responseData['isAdmin'];
-         var myToken = responseData['token'];
-          prefs.setString('token', myToken);
         if(isAdmin == true){
           Navigator.push(context, MaterialPageRoute(builder: (_)=>MyApp()));
 
         }
         else {
             var myToken = responseData['token'];
-          prefs.setString('token', myToken);
            Navigator.push(context, MaterialPageRoute(builder: (_)=>MyWidget()));
         }
         }
@@ -318,4 +312,6 @@ class _myloginState extends State<mylogin> with SingleTickerProviderStateMixin {
        ),
     );
   }
+  
+  Object? myLocalizedMessage() {}
 }
